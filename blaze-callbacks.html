@@ -1,0 +1,19 @@
+<head>
+  <title>blaze-callbacks</title>
+</head>
+
+<body>
+  <p>Open the console and run <tt>Session.set('flag', true);</tt></p>
+
+  {{#unless flag}}
+    {{> outer}}
+  {{/unless}}
+</body>
+
+<template name="outer">
+  {{> inner}}
+</template>
+
+<template name="inner">
+  CONTENT
+</template>
