@@ -3,17 +3,25 @@
 </head>
 
 <body>
-  <p>Open the console and run <tt>Session.set('flag', true);</tt></p>
 
-  {{#unless flag}}
-    {{> outer}}
-  {{/unless}}
+{{> parent }}
+
 </body>
 
-<template name="outer">
-  {{> inner}}
+<template name="parent">
+  {{#if showChild1}}
+    {{> child1 showChild1}}
+  {{/if }}
+
+  {{> child2 }}
 </template>
 
-<template name="inner">
-  CONTENT
+<template name="child1">
+  <div id="child1">
+
+  </div>
+</template>
+
+<template name="child2">
+
 </template>

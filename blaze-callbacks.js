@@ -1,33 +1,26 @@
 if (Meteor.isClient) {
-  Session.set('flag', false);
 
-  Template.body.helpers({
-    flag: function () {
-      return Session.get('flag');
+  Template.parent.helpers({
+    showChild1: function () {
+      return Session.get("child2-onRendered-called");
     }
   });
-  
-  Template.outer.onCreated(function () {
-    console.log("onCreated outer");
+
+  Template.parent.onRendered(function () {
+    console.log("parent - onRendered");
+    if (this.$("#child1").length > 0) {
+      console.log("parent's onRendered called before child1's onRendered (even though child1 is already on the page)");
+    }
   });
 
-  Template.outer.onRendered(function () {
-    console.log("onRendered outer");
+  Template.child1.onRendered(function () {
+    console.log("child1 - onRendered");
   });
 
-  Template.outer.onDestroyed(function () {
-    console.log("onDestroyed outer");
-  });
 
-  Template.inner.onCreated(function () {
-    console.log("onCreated inner");
-  });
-
-  Template.inner.onRendered(function () {
-    console.log("onRendered inner");
-  });
-
-  Template.inner.onDestroyed(function () {
-    console.log("onDestroyed inner");
+  Session.set("child2-onRendered-called", false);
+  Template.child2.onRendered(function () {
+    console.log("child2 - onRendered");
+    Session.set("child2-onRendered-called", true)
   });
 }
