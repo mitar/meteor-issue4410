@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+  var child1RenderedCalled = false;
 
   Template.parent.helpers({
     showChild1: function () {
@@ -8,12 +9,13 @@ if (Meteor.isClient) {
 
   Template.parent.onRendered(function () {
     console.log("parent - onRendered");
-    if (this.$("#child1").length > 0) {
+    if (!child1RenderedCalled && this.$("#child1").length > 0) {
       console.log("parent's onRendered called before child1's onRendered (even though child1 is already on the page)");
     }
   });
 
   Template.child1.onRendered(function () {
+    child1RenderedCalled = true;
     console.log("child1 - onRendered");
   });
 
